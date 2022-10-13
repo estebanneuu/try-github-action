@@ -48,22 +48,16 @@ jobs:
       # - name: Test
       #   run: |
       #     npm run test --
-      - name: Conventional Changelog Action
-        id: changelog
-        uses: TriPSs/conventional-changelog-action@v3
-        with:
-          github-token: ${{ secrets.TOKEN_GITHUB_ACTION }}
-          output-file: 'false'
-      - name: Create Release
-        uses: actions/create-release@v1
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_ACTION }}
-        with:
-          tag_name: ${{ steps.changelog.outputs.tag }}
-          release_name: ${{ steps.changelog.outputs.tag }}
-          body: ${{ steps.changelog.outputs.clean_changelog }}
-      - name: Deploy
-        run: |
-          npm run deploy
+  deploy:
+      runs-on: ubuntu-latest
 
+      steps:
+      - uses: actions/checkout@v3
+      - name: Deplying on # https://dodoboulistick.github.io/angular-devops/
+        uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
+        with:
+          github_access_token: ${{ secrets.ACCESS_TOKEN }}
+          build_configuration: production
+          base_href: ./
+          deploy_branch: dist
+          angular_dist_build_folder: dist
