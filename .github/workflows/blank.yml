@@ -23,7 +23,7 @@ jobs:
       - run: npm ci
       #- run: npm run lint
       - run: npm run build
-     # - run: npm run test
+      - run: npm run test
 
   deploy:
     needs: build
@@ -31,7 +31,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Deplying on # https://dodoboulistick.github.io/angular-devops/
+    - name: Deplying on
       uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
       with:
         github_access_token: ${{ secrets.ACCESS_TOKEN }}
