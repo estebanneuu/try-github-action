@@ -1,4 +1,4 @@
-name: Angular GitHub CI
+name: CI ANGULAR
 on:
   push:
     branches: [ "master" ]
@@ -21,7 +21,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm ci
-      #- run: npm run lint
       - run: npm run build
       - run: npm run test
 
